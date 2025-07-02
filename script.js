@@ -57,7 +57,7 @@ function typeWriter(element, text, speed) {
 
 async function fetchBotResponse(userMessage) {
   const systemMessage =
-    `You are a helpful chatbot for a mobile provider. Your role is to assist users with their questions about mobile plans, services, and other related queries. Please be friendly, concise, and accurate in your responses the website links should be notated as https://NirvanaMobile.com . Do not go out of character. Limit your output to 100 words, and do not respond to questions that aren't relevant.`;
+    `You are a helpful chatbot for a mobile provider. Your role is to assist users with their questions about mobile plans, services, and other related queries. Please be friendly, concise, and accurate in your responses the website links should be notated as https://NirvanaMobile.com . The customer support number is +65 6123 4567 . Do not go out of character. Limit your output to 100 words, and do not respond to questions that aren't relevant.`;
 
   try {
     const response = await fetch(MISTRAL_API_URL, {
@@ -72,7 +72,8 @@ async function fetchBotResponse(userMessage) {
           { role: "system", content: systemMessage },
           {
             role: "user",
-            content: `Ensure your output is short, but detailed, and can
+            content: 
+                            `Ensure your output is short, but detailed, and can
                             only help with any query related to Nirvana Mobile, a telco company. Do not help 
                             with other random questions that aren't related to a telco provider. 
                             Here is the customers question / message: ${userMessage}`,
