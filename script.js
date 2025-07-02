@@ -72,8 +72,7 @@ async function fetchBotResponse(userMessage) {
           { role: "system", content: systemMessage },
           {
             role: "user",
-            content: 
-                            `Ensure your output is short, but detailed, and can
+            content: `Ensure your output is short, but detailed, and can
                             only help with any query related to Nirvana Mobile, a telco company. Do not help 
                             with other random questions that aren't related to a telco provider. 
                             Here is the customers question / message: ${userMessage}`,
