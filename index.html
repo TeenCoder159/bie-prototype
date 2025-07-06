@@ -21,48 +21,19 @@
         transform: translateY(-5px);
       }
 
-      .chat-container {
-        position: fixed;
-        bottom: 20px;
-        right: 20px;
-        width: 300px;
-        max-height: 60vh;
-        border: 1px solid #dee2e6;
-        border-radius: 0.25rem;
-        background: white;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        z-index: 9999;
-        overflow: hidden;
-      }
-
-      .chat-header {
-        background-color: #0d6efd;
-        color: white;
-        padding: 0.5rem;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        font-size: 1rem;
-      }
-
-      .chat-actions button {
-        margin-left: 5px;
-        padding: 0.1rem 0.4rem;
-        font-size: 0.8rem;
-      }
-
       .chat-frame {
         width: 100%;
         height: 300px;
         border: none;
       }
+
       .bg-navy-blue {
         background-color: #000080 !important;
       }
     </style>
   </head>
   <body>
-    <!-- Navbar / ToolBar -->
+    <!-- Navbar -->
     <nav class="navbar navbar-expand-lg bg-navy-blue text-white">
       <div class="container-fluid text-white">
         <a class="navbar-brand text-white" href="#">Nirvana Mobile</a>
@@ -83,13 +54,13 @@
       </div>
     </nav>
 
-    <!-- Landing Page Banner -->
+    <!-- Banner -->
     <div class="container-fluid bg-navy-blue text-white text-center p-5">
       <h1>Welcome to Nirvana Mobile</h1>
       <p>The best Telco Provider in South East Asia</p>
     </div>
 
-    <!-- Main Content -->
+    <!-- Plans -->
     <div class="container mt-5">
       <h1 class="text-center mb-4">Our Mobile Plans</h1>
 
@@ -157,7 +128,7 @@
           </div>
         </div>
 
-        <!-- Placeholder Plan 4 -->
+        <!-- Plan 4 -->
         <div class="col-lg-4 col-md-6 mb-4">
           <div class="card h-100 plan-card">
             <div class="card-header bg-primary text-white">
@@ -178,10 +149,10 @@
           </div>
         </div>
 
-        <!-- Placeholder Plan 5 -->
-        <div class="col-lg-4 col-md-6 mb-4 bie">
+        <!-- Plan 5 -->
+        <div class="col-lg-4 col-md-6 mb-4">
           <div class="card h-100 plan-card">
-            <div class="card-header AA2503 bg-primary text-white">
+            <div class="card-header bg-primary text-white">
               <h4 class="mb-0">Family</h4>
             </div>
             <div class="card-body">
@@ -194,12 +165,12 @@
                 <li>Unlimited SMS</li>
                 <li>Free Roaming & Caller ID</li>
               </ul>
-              <button class="umang btn btn-primary w-100">Select Plan</button>
+              <button class="btn btn-primary w-100">Select Plan</button>
             </div>
           </div>
         </div>
 
-        <!-- Placeholder Plan 6 -->
+        <!-- Plan 6 -->
         <div class="col-lg-4 col-md-6 mb-4">
           <div class="card h-100 plan-card">
             <div class="card-header bg-primary text-white">
@@ -222,21 +193,42 @@
       </div>
     </div>
 
-    <!-- Chat Floating Container -->
-    <div id="chat-container" class="chat-container">
-      <div class="chat-header bg-navy-blue">
-        <span>Chat Support</span>
-        <div class="chat-actions">
-          <button id="toggle-chat-btn" class="btn btn-sm btn-light">−</button>
+    <!-- Chat Button & Floating Chat Box -->
+    <div id="chat-container">
+      <button
+        id="chat-toggle-btn"
+        class="btn btn-primary rounded-circle d-flex align-items-center justify-content-center"
+        style="width: 60px; height: 60px; position: fixed; bottom: 20px; right: 20px; z-index: 9999"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="30"
+          height="30"
+          viewBox="0 0 24 24"
+          fill="white"
+        >
+          <path d="M12 2a1 1 0 0 1 1 1v1.07c3.39.49 6 3.39 6 6.93v2.5a3.5 3.5 0 0 1-3.5 3.5H8.5A3.5 3.5 0 0 1 5 13.5V11a7 7 0 0 1 6-6.93V3a1 1 0 0 1 1-1Zm-4 9a1 1 0 1 0 0 2 1 1 0 0 0 0-2Zm8 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2Z" />
+          <path d="M7 18c0 .55.45 1 1 1h8a1 1 0 1 0 0-2H8c-.55 0-1 .45-1 1Z" />
+        </svg>
+      </button>
+      <div
+        id="chat-box"
+        style="display: none; position: fixed; bottom: 90px; right: 20px; width: 300px; max-height: 60vh; border: 1px solid #dee2e6; border-radius: 0.25rem; background: white; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); z-index: 9999; overflow: hidden"
+      >
+        <div class="chat-header bg-navy-blue text-white p-2 d-flex justify-content-between align-items-center">
+          <span>Chat Support</span>
+          <button id="close-chat-btn" class="btn btn-sm btn-light">
+            &times;
+          </button>
         </div>
+        <iframe src="chat.html" class="chat-frame"></iframe>
       </div>
-      <iframe src="chat.html" class="chat-frame"></iframe>
     </div>
 
     <!-- Footer -->
     <footer class="py-4 bg-dark text-white-50 mt-5">
       <div class="container text-center">
-        <small>Copyright &copy; Nirvana Mobile</small>
+        <small>&copy; Nirvana Mobile</small>
       </div>
     </footer>
 
@@ -245,20 +237,17 @@
 
     <!-- Chat Toggle Script -->
     <script>
-      document.getElementById("toggle-chat-btn").addEventListener(
-        "click",
-        () => {
-          const iframe = document.querySelector(".chat-frame");
-          const toggleBtn = document.getElementById("toggle-chat-btn");
-          if (iframe.style.display === "none") {
-            iframe.style.display = "block";
-            toggleBtn.textContent = "−";
-          } else {
-            iframe.style.display = "none";
-            toggleBtn.textContent = "+";
-          }
-        },
-      );
+      const chatToggleBtn = document.getElementById("chat-toggle-btn");
+      const chatBox = document.getElementById("chat-box");
+      const closeChatBtn = document.getElementById("close-chat-btn");
+
+      chatToggleBtn.addEventListener("click", () => {
+        chatBox.style.display = "block";
+      });
+
+      closeChatBtn.addEventListener("click", () => {
+        chatBox.style.display = "none";
+      });
     </script>
   </body>
 </html>
