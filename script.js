@@ -7,8 +7,14 @@ const MISTRAL_API_KEY = "7KpCR2Gio0kpGNYF56BkrVU8pdQ147U8"; // Replace with your
 
 // Welcome message on page load
 window.addEventListener("DOMContentLoaded", () => {
-  const welcomeMessage = "Welcome to Nirvana Bot, what do you need help in?";
+  const welcomeMessage = "Welcome to Nirvana Bot, what do you need help in? ";
+  const quickOptions =
+    "Some common questions include:\n Where can I purchase more roaming data?\n2) What are the different plans Nirvana Mobile offers?\n 3) Where can I login and view my statistics";
   appendMessage(welcomeMessage, "bot-message");
+    setTimeout(() => {
+      console.log("This message appears after a 2-second delay.");
+    }, 500); // 2000 milliseconds = 2 seconds
+  appendMessage(quickOptions, "bot-message");
 });
 
 sendBtn.addEventListener("click", sendMessage);
